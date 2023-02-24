@@ -38,7 +38,6 @@ const NavBar = () => {
           <Link to="/login">Iniciar sesión</Link>
           </>
         )
-        // <button className="btn">Login</button>
       }
     </nav>
   );

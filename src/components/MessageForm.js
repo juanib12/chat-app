@@ -14,7 +14,7 @@ const MessageForm = ({handleSubmit, text, setText, setImg}) => {
                 style={{display: "none"}}
             />
             <div>
-                <input type="text" placeholder='Enviar mensaje' value={text} onChange={(e) => setText(e.target.value)}/>
+                <input type="text" placeholder='Enviar mensaje...' value={text} onChange={(e) => setText(e.target.value)}/>
             </div>
             <div>
                 <button className='btn'>Enviar</button>

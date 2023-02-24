@@ -6,7 +6,6 @@ import { db } from "../firebase";
 const User = ({ user1, user, selectUser, chat }) => {
   const user2 = user?.uid;
   const [data, setData] = useState("");
-  const [addEmail, setAddEmail] = useState("")
 
 
   useEffect(() => {
