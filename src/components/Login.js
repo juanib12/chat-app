@@ -75,6 +75,7 @@ const Login = () => {
           email: user.email,
           createdAt: Timestamp.fromDate(new Date()),
           isOnline: true,
+          avatar: user.photoURL
         });
       }
     } catch (err) {

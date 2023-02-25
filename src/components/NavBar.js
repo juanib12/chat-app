@@ -26,6 +26,7 @@ const NavBar = () => {
       </Link>
       {
         user ? (
+          // null
           <>
             <p>{user?.displayName}</p>
             <button onClick={handleLogout} className="btn">

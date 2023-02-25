@@ -17,13 +17,14 @@ import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import User from "../components/User";
 import MessageForm from "../components/MessageForm";
 import Message from "../components/Message";
-import {Navigate} from 'react-router-dom'
-import {useAuthState} from 'react-firebase-hooks/auth'
+import { Navigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import Img from "../images/userSinFoto.png";
 
 const Home = () => {
+  const [user] = useAuthState(auth);
 
-  const [user] = useAuthState(auth)
-
+  const [error, setError] = useState("");
   const [users, setUsers] = useState([]);
   const [chat, setChat] = useState("");
   const [text, setText] = useState("");
@@ -91,30 +92,38 @@ const Home = () => {
       url = dlUrl;
     }
 
-    await addDoc(collection(db, "messages", id, "chat"), {
-      text,
-      from: user1,
-      to: user2,
-      createdAt: Timestamp.fromDate(new Date()),
-      media: url || "",
-    });
+    if (text !== "") {
+      await addDoc(collection(db, "messages", id, "chat"), {
+        text,
+        from: user1,
+        to: user2,
+        createdAt: Timestamp.fromDate(new Date()),
+        media: url || "",
+      });
 
-    await setDoc(doc(db, "lastMsg", id), {
-      text,
-      from: user1,
-      to: user2,
-      createdAt: Timestamp.fromDate(new Date()),
-      media: url || "",
-      unread: true,
-    });
+      await setDoc(doc(db, "lastMsg", id), {
+        text,
+        from: user1,
+        to: user2,
+        createdAt: Timestamp.fromDate(new Date()),
+        media: url || "",
+        unread: true,
+      });
 
+      setText("");
+      setImg("");
+    } else {
+      setError("Error, debes escribir un mensaje!");
+    }
     setText("");
     setImg("");
+    setError("");
   };
+
   return (
     <>
-    {user ? (
-          <div className="home_container">
+      {user ? (
+        <div className="home_container">
           <div className="users_container">
             {users.map((user) => (
               <User
@@ -130,7 +139,11 @@ const Home = () => {
             {chat ? (
               <>
                 <div className="messages_user">
-                  <h3>{chat.name}</h3>
+                  <img src={chat.avatar || Img} className="avatar" />
+                  <div className="messages_user-detail">
+                    <h3>{chat.name}</h3>
+                    <p>{chat.email}</p>
+                  </div>
                 </div>
                 <div className="messages">
                   {msgs.length
@@ -144,17 +157,19 @@ const Home = () => {
                   text={text}
                   setText={setText}
                   setImg={setImg}
+                  error={error}
                 />
               </>
             ) : (
-              <h3 className="no_conv">Seleccioná a un usuario para comenzar una conversación</h3>
+              <h3 className="no_conv">
+                Seleccioná a un usuario para comenzar una conversación
+              </h3>
             )}
           </div>
         </div>
-    ) : (
-      <Navigate to="/login" replace={true}/>
-    )}
-
+      ) : (
+        <Navigate to="/login" replace={true} />
+      )}
     </>
   );
 };
