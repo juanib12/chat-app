@@ -39,7 +39,7 @@ const Register = () => {
         email,
         createdAt: Timestamp.fromDate(new Date()),
         isOnline: true,
-        authProvider: "Email and Password"
+        authProvider: "Email and Password",
       });
       setData({
         name: "",

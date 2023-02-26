@@ -6,6 +6,7 @@ import { UserContextProvider } from "./context/User.context";
 import PrivateRoute from "./components/PrivateRoute";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Profile from "./components/Profile";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route element={<PrivateRoute />}>
             <Route element={<Home />} path="/" exact />
+            <Route element={<Profile />} path="/profile" exact/>
           </Route>
         </Routes>
       </BrowserRouter>

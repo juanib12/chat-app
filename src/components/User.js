@@ -15,7 +15,8 @@ const User = ({ user1, user, selectUser, chat }) => {
     });
     return () => unsub();
   }, []);
-console.log(user)
+
+
   return (
     <>
       <div
