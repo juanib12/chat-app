@@ -5,7 +5,7 @@ import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDOKyDnbEG95ZZmNLQ0w34-Ho3J_fFfpNY",
-  authDomain: "chat-app-82ba2.firebaseapp.com",
+  authDomain: ["chat-app-82ba2.firebaseapp.com", "vercel.app"],
   projectId: "chat-app-82ba2",
   storageBucket: "chat-app-82ba2.appspot.com",
   messagingSenderId: "934096836988",
