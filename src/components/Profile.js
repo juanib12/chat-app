@@ -19,7 +19,6 @@ const Profile = () => {
     }
   };
 
-  console.log(user);
   return (
     <div className="profile">
       <div className="profile_detail">

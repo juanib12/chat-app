@@ -5,7 +5,7 @@ const MessageForm = ({ handleSubmit, text, setText, setImg, error }) => {
     <>
       <form className="message_form" onSubmit={handleSubmit}>
         <label className="img">
-          <i class="bx bx-upload"></i>
+          <i className="bx bx-upload"></i>
         </label>
         <input
           onChange={(e) => setImg(e.target.files[0])}

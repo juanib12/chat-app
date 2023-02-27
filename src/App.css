@@ -379,6 +379,15 @@ section .form {
   width: 100px;
 }
 
+.search-input{
+  padding: 15px;
+  border-radius: 200px;
+  outline: none;
+  border: 5px solid var(--color-6);
+  background-color: transparent;
+  color: #eee;
+}
+
 @media screen and (max-width: 767px) {
   .home_container {
     grid-template-columns: 2fr 3fr;

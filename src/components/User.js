@@ -7,18 +7,23 @@ const User = ({ user1, user, selectUser, chat }) => {
   const user2 = user?.uid;
   const [data, setData] = useState("");
 
-
-  useEffect(() => {
+  const lastMsgMethod = () => {
     const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
     let unsub = onSnapshot(doc(db, "lastMsg", id), (doc) => {
       setData(doc.data());
     });
     return () => unsub();
+  };
+
+
+  useEffect(() => {
+    lastMsgMethod();
   }, []);
 
 
   return (
     <>
+
       <div
         className={`user_wrapper ${chat.name === user.name && "selected_user"}`}
         onClick={() => selectUser(user)}
@@ -54,7 +59,6 @@ const User = ({ user1, user, selectUser, chat }) => {
           className="avatar sm_screen"
         />
       </div>
-
     </>
   );
 };

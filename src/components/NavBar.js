@@ -8,10 +8,11 @@ const NavBar = () => {
   return (
     <nav className="nav-bar">
       <Link to="/" className="links">
-        <h2>Chat-APP</h2>
+        <h2>FireChat</h2>
       </Link>
       {user ? (
         <>
+        <p style={{fontSize: "10px"}}>Developed by Juan Bianco</p>
           <Link to="/profile">
             <img src={user.photoURL} alt={`avatar-${user.displayName}`} className="avatar-navbar"/>
           </Link>

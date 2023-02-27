@@ -30,6 +30,7 @@ const Home = () => {
   const [text, setText] = useState("");
   const [img, setImg] = useState("");
   const [msgs, setMsgs] = useState([]);
+  // const [search, setSearch] = useState("");
 
   const user1 = auth.currentUser.uid;
 
@@ -120,11 +121,30 @@ const Home = () => {
     setError("");
   };
 
+  // const searchUserMethod = (e) => {
+  //   e.preventDefault();
+
+  //   setUsers(
+  //     users.filter((user) =>
+  //       user.email.toLowerCase().includes(search.toLowerCase())
+  //     )
+  //   );
+  // };
+
   return (
     <>
       {user ? (
         <div className="home_container">
           <div className="users_container">
+            {/* <form onSubmit={(e) => searchUserMethod(e)}>
+              <input
+                type="text"
+                placeholder="Buscar por email..."
+                onChange={(e) => setSearch(e.target.value)}
+                className="search-input"
+              />
+              <button type="submit">Buscar</button>
+            </form> */}
             {users.map((user) => (
               <User
                 key={user.uid}
