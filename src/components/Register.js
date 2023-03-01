@@ -1,62 +1,22 @@
-import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../firebase";
-import { setDoc, doc, Timestamp } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useAuth } from "../hooks/useAuth";
 
 const Register = () => {
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    error: null,
-    loading: false,
-  });
+  const {
+    handleChange,
+    handleSubmitRegister,
+    name,
+    email,
+    password,
+    error,
+    loading,
+    sigInWithGoogle,
+  } = useAuth();
 
-  const history = useNavigate();
-
-  const { name, email, password, error, loading } = data;
-
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setData({ ...data, error: null, loading: true });
-    if (!name || !email || !password) {
-      setData({ ...data, error: "Todos los campos son requeridos!" });
-    }
-    try {
-      const result = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      await setDoc(doc(db, "users", result.user.uid), {
-        uid: result.user.uid,
-        name,
-        email,
-        createdAt: Timestamp.fromDate(new Date()),
-        isOnline: true,
-        authProvider: "Email and Password",
-      });
-      setData({
-        name: "",
-        email: "",
-        password: "",
-        error: null,
-        loading: false,
-      });
-      history("/", {replace: true});
-    } catch (err) {
-      setData({ ...data, error: err.message, loading: false });
-    }
-  };
   return (
     <section>
       <h3>Creá una cuenta</h3>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmitRegister}>
         <div className="input_container">
           <label htmlFor="name">Nombre</label>
           <input type="text" name="name" value={name} onChange={handleChange} />
@@ -86,6 +46,12 @@ const Register = () => {
           </button>
         </div>
       </form>
+      <div className="btn_container">
+        <p>O creá tu cuenta con </p>
+        <button className="btn " onClick={sigInWithGoogle}>
+          <i class="bx bxl-google icons"></i>Google
+        </button>
+      </div>
     </section>
   );
 };

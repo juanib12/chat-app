@@ -5,6 +5,7 @@ import { auth } from "../firebase";
 const NavBar = () => {
   const [user] = useAuthState(auth)
 
+  console.log(user)
   return (
     <nav className="nav-bar">
       <Link to="/" className="links">
